@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import rx.Observable;
 
+import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
