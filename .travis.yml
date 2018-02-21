@@ -1,0 +1,22 @@
+language: android
+jdk: oraclejdk8
+env:
+  matrix:
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-25.0.2
+  - android-25
+  - extra-android-m2repository
+  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+
+script:
+  # Unit Test
+  - ./gradlew test
+notifications:
+  slack:
+      on_success: always
+      rooms:
+        - werockstar:wl61Y86uYultyrQHTR3RE9Cx#ci_notify
