@@ -51,24 +51,20 @@ public class MainFragment extends Fragment implements GithubPresenter.View {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
         presenter = new GithubPresenter(this, api);
-
         initialView(view);
-
         return view;
     }
 
     private void initialView(View view) {
-        imageViewAvatar = (ImageView) view.findViewById(R.id.imageViewProfile);
-        tvFullName = (TextView) view.findViewById(R.id.tvFullName);
-        tvUsername = (TextView) view.findViewById(R.id.tvUsername);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        btnSearch = (Button) view.findViewById(R.id.btnSearch);
-        edtUsername = (EditText) view.findViewById(R.id.edtUsername);
+        imageViewAvatar = view.findViewById(R.id.imageViewProfile);
+        tvFullName = view.findViewById(R.id.tvFullName);
+        tvUsername = view.findViewById(R.id.tvUsername);
+        progressBar = view.findViewById(R.id.progressBar);
+        btnSearch = view.findViewById(R.id.btnSearch);
+        edtUsername = view.findViewById(R.id.edtUsername);
         progressBar.setVisibility(View.GONE);
 
         btnSearch.setOnClickListener(v -> {
@@ -82,9 +78,10 @@ public class MainFragment extends Fragment implements GithubPresenter.View {
         if (collection != null) {
             tvUsername.setText(collection.getUsername());
             tvFullName.setText(collection.getFullName());
-
             imageViewAvatar.setVisibility(View.VISIBLE);
-            Glide.with(getActivity()).load(collection.getAvatar()).into(imageViewAvatar);
+            if (getActivity() != null) {
+                Glide.with(getActivity()).load(collection.getAvatar()).into(imageViewAvatar);
+            }
         }
     }
 
